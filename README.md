@@ -13,4 +13,4 @@ Types:
 `feat` is for adding a new feature\
 `fix` is for fixing a bug\
 `refactor` is for changing code for peformance or convenience purpose\
-`chore` is for everything else (writing documentation, formatting, adding tests, cleaning useless code etc.)\
+`chore` is for everything else (writing documentation, formatting, adding tests, cleaning useless code etc.)
