@@ -13,7 +13,7 @@ const NavigationButton = ({ mobileMenuOpen, toggleMenu, ...props }) => {
 			{...props}
 			aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
 			onClick={toggleMenu}
-			className='px-3 py-1.5'>
+			className='relative z-1 px-3 py-1.5'>
 			{icon}
 		</button>
 	)
