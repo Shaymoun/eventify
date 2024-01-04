@@ -8,22 +8,27 @@ import SearchBar from "./SearchBar"
 const MainNavigation = () => {
 	const { darkMode, mobileMenuOpen, toggleMenu, toggleSearchBar } =
 		useContext(EventifyContext)
-	const navBarClasses = `bg-sky-500 fixed inset-0 h-dvh ${
+	const navBarClasses = `fixed h-dvh w-full bg-white ${
 		mobileMenuOpen ? "" : "-translate-x-full"
 	}`
 
 	return (
-		<div className='border-b-2 mb-1 p-2'>
-			<header className='relative flex justify-between items-center overflow-x-hidden  '>
-				<NavigationButton
-					mobileMenuOpen={mobileMenuOpen}
-					toggleMenu={toggleMenu}
-				/>
-				<div>
-					<Link to='/'>LOGO</Link>
-				</div>
-				<SearchButton onClick={toggleSearchBar} iconClassses='h-6 w-6' />
-				<nav className={navBarClasses}>
+		<>
+			<div className='border-b-2 mb-1 p-2'>
+				<header className='relative flex justify-between items-center overflow-x-hidden  '>
+					<NavigationButton
+						mobileMenuOpen={mobileMenuOpen}
+						toggleMenu={toggleMenu}
+					/>
+					<div>
+						<Link to='/'>LOGO</Link>
+					</div>
+					<SearchButton onClick={toggleSearchBar} iconClassses='h-6 w-6' />
+				</header>
+				<SearchBar />
+			</div>
+			<div className={navBarClasses}>
+				<nav className="h-1/3">
 					<ul className='flex flex-col justify-around items-center h-full w-full'>
 						<NavLink to='/profile' onClick={toggleMenu}>
 							Profile
@@ -36,9 +41,8 @@ const MainNavigation = () => {
 						</NavLink>
 					</ul>
 				</nav>
-			</header>
-			<SearchBar />
-		</div>
+			</div>
+		</>
 	)
 }
 
