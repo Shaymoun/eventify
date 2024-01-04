@@ -7,10 +7,10 @@ const SearchBar = () => {
 
 	return (
 		<search
-			className={`flex justify-center items-center  bg-white px-1  ${
+			className={`flex justify-center items-center  bg-white px-2  ${
 				searchBarOpen ? "block h-16" : "hidden h-0"
-			}`}>
-			<form className='relative'>
+			} lg:w-full lg:flex h-16`}>
+			<form className='relative md:w-full xl:w-2/3'>
 				<input
 					type='text'
 					name='event-name'
@@ -24,8 +24,8 @@ const SearchBar = () => {
 					placeholder='City or zip code'
 				/>
 				<SearchButton
-					iconClassses='h-6 w-6'
-					buttonClasses='absolute inset-y-0 right-0 '
+					iconClassses='h-6 w-6 text-white'
+					buttonClasses='absolute inset-y-0 right-0 bg-green-400 rounded-r-lg'
 				/>
 			</form>
 		</search>
