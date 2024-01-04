@@ -3,9 +3,9 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
 
 const NavigationButton = ({ mobileMenuOpen, toggleMenu, ...props }) => {
 	let icon = mobileMenuOpen ? (
-		<XMarkIcon className='block h-10 w-10' />
+		<XMarkIcon className='block h-7 w-7' />
 	) : (
-		<Bars3Icon className='block h-10 w-10' />
+		<Bars3Icon className='block h-7 w-7' />
 	)
 
 	return (
