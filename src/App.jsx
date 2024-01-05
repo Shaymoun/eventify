@@ -4,6 +4,7 @@ import HomePage from "./pages/Home"
 import RootLayout from "./pages/Root"
 import ProfilePage from "./pages/Profile"
 import AddEventPage from "./pages/AddEvent"
+import MyEventsPage from "./pages/MyEvents"
 
 function App() {
 	const router = createBrowserRouter([
@@ -14,7 +15,7 @@ function App() {
 				{ index: true, element: <HomePage /> },
 				{ path: "/profile", element: <ProfilePage /> },
 				{ path: "/add-event", element: <AddEventPage /> },
-				{ path: "/my-events", element: <ProfilePage /> },
+				{ path: "/my-events", element: <MyEventsPage /> },
 			],
 		},
 	])
