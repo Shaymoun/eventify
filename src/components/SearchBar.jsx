@@ -7,7 +7,7 @@ const SearchBar = () => {
 
 	return (
 		<search
-			className={`flex justify-center items-center  bg-white px-2  ${
+			className={`flex justify-center items-center  bg-white px-2   ${
 				searchBarOpen ? "block h-16" : "hidden h-0"
 			} lg:w-full lg:flex h-16`}>
 			<form className='relative md:w-full xl:w-2/3'>
