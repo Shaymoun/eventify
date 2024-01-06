@@ -18,7 +18,7 @@ const MobileNavigation = ({ mobileMenuOpen, toggleMenu, toggleSearchBar }) => {
 						className='px-3 py-1.5'
 					/>
 					<div className='px-6 py-2'>
-						<Link to='/' className='text-2xl text-green-400 font-bold'>
+						<Link to='/' className='text-2xl text-primary-color font-bold'>
 							Eventify
 						</Link>
 					</div>
@@ -33,22 +33,13 @@ const MobileNavigation = ({ mobileMenuOpen, toggleMenu, toggleSearchBar }) => {
 			<div className={`${navBarClasses} transition-transform ease-in-out `}>
 				<nav className='h-1/2 '>
 					<ul className='flex flex-col justify-around items-center h-full w-full border-b-2 *:text-gray-500 text-lg font-semibold '>
-						<NavLink
-							to='/add-event'
-							onClick={toggleMenu}
-							className='hover:text-green-400 transition-colors duration-300'>
+						<NavLink to='/add-event' onClick={toggleMenu}>
 							Add Event
 						</NavLink>
-						<NavLink
-							to='/my-events'
-							onClick={toggleMenu}
-							className='hover:text-green-400 transition-colors duration-300'>
+						<NavLink to='/my-events' onClick={toggleMenu}>
 							My Events
 						</NavLink>
-						<NavLink
-							to='/profile'
-							onClick={toggleMenu}
-							className='hover:text-green-400 transition-colors duration-300'>
+						<NavLink to='/profile' onClick={toggleMenu}>
 							Profile
 						</NavLink>
 					</ul>
