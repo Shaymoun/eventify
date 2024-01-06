@@ -1,3 +1,5 @@
+import Button from "../ui/Button"
+
 const AddEventPage = () => {
 	return (
 		<div className='flex justify-center py-2 sm:w-4/5 sm:mx-auto lg:w-[800px] lg:items-center lg:py-8'>
@@ -52,9 +54,7 @@ const AddEventPage = () => {
 						required
 					/>
 				</div>
-				<button className='py-3 rounded bg-green-400 text-white font-bold mt-4 lg:w-96 lg:mx-auto'>
-					Add event
-				</button>
+				<Button className='mt-4 lg:w-96 lg:mx-auto lg:text-xl'>Add event</Button>
 			</form>
 		</div>
 	)
