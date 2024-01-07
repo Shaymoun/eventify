@@ -2,7 +2,7 @@ import Button from "../ui/Button"
 
 const AddEventPage = () => {
 	return (
-		<div className='flex justify-center py-2 sm:w-4/5 sm:mx-auto lg:w-[800px] lg:items-center lg:py-8'>
+		<div className='flex justify-center py-8 sm:w-4/5 sm:mx-auto lg:w-[800px] lg:items-center lg:py-8'>
 			<form action='' className='flex flex-col justify-around h-4/5 sm:w-full '>
 				<div>
 					<label htmlFor='name' className='block py-2 text-xl font-semibold'>

@@ -4,13 +4,13 @@ import Footer from "../components/Footer"
 
 const RootLayout = () => {
 	return (
-		<>
+		<div>
 			<MainNavigation />
-			<main className='bg-primary-bg'>
+			<main className='bg-primary-bg h-full'>
 				<Outlet />
 			</main>
 			<Footer />
-		</>
+		</div>
 	)
 }
 
