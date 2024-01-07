@@ -5,13 +5,13 @@ import SearchBar from "./SearchBar"
 import SearchButton from "../ui/SearchButton"
 
 const MobileNavigation = ({ mobileMenuOpen, toggleMenu, toggleSearchBar }) => {
-	const navBarClasses = `z-10 fixed h-dvh w-full bg-white  ${
+	const navBarClasses = `z-10 fixed h-dvh w-full bg-primary-bg  ${
 		mobileMenuOpen ? "" : "-translate-x-full"
 	}`
 	return (
 		<>
-			<div className='sm:block lg:hidden border-b-2 p-2'>
-				<header className='relative flex justify-between items-center overflow-x-hidden z-10 bg-white'>
+			<div className='sm:block lg:hidden border-b-2 p-2 bg-primary-bg'>
+				<header className='relative flex justify-between items-center overflow-x-hidden z-10 '>
 					<NavigationButton
 						mobileMenuOpen={mobileMenuOpen}
 						toggleMenu={toggleMenu}
