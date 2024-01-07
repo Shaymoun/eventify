@@ -1,11 +1,7 @@
 import { Link, NavLink } from "react-router-dom"
 import SearchBar from "./SearchBar"
 
-const DesktopNavigation = ({
-	mobileMenuOpen,
-	toggleMenu,
-	toggleSearchBar,
-}) => {
+const DesktopNavigation = ({ mobileMenuOpen, toggleSearchBar }) => {
 	return (
 		<div className='max-[1024px]:hidden lg:block border-b-2 p-2 bg-primary-bg'>
 			<header className='flex justify-around items-center overflow-x-hidden'>
@@ -19,19 +15,16 @@ const DesktopNavigation = ({
 					<ul className='flex flex-row justify-between items-center px-8 *:text-gray-500 text-md font-semibold lg:w-96 lg:ml-auto'>
 						<NavLink
 							to='/add-event'
-							onClick={toggleMenu}
 							className='hover:text-primary-color transition-colors duration-300 xl:text-xl'>
 							Add Event
 						</NavLink>
 						<NavLink
 							to='/my-events'
-							onClick={toggleMenu}
 							className='hover:text-primary-color transition-colors duration-300 xl:text-xl'>
 							My Events
 						</NavLink>
 						<NavLink
 							to='/profile'
-							onClick={toggleMenu}
 							className='hover:text-primary-color transition-colors duration-300 xl:text-xl'>
 							Profile
 						</NavLink>
