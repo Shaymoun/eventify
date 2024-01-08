@@ -1,5 +1,11 @@
+import EventsList from "../components/EventsList"
+
 const MyEventsPage = () => {
-	return <div>MyEventsPage</div>
+	return (
+		<>
+			<EventsList />
+		</>
+	)
 }
 
 export default MyEventsPage
