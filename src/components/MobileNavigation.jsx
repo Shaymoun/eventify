@@ -1,10 +1,21 @@
-import React from "react"
+import { useState } from "react"
 import NavigationButton from "../ui/NavigationButton"
 import { Link, NavLink } from "react-router-dom"
 import SearchBar from "./SearchBar"
 import SearchButton from "../ui/SearchButton"
 
-const MobileNavigation = ({ mobileMenuOpen, toggleMenu, toggleSearchBar }) => {
+const MobileNavigation = ({ toggleSearchBar }) => {
+	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+	const [searchBarOpen, setSearchBarOpen] = useState(false)
+
+	const toggleMenu = () => {
+		setMobileMenuOpen(menuState => !menuState)
+	}
+
+	const toggleSearchBar = () => {
+		setSearchBarOpen(searchBarState => !searchBarState)
+	}
+
 	const navBarClasses = `z-10 fixed h-dvh w-full bg-primary-bg  ${
 		mobileMenuOpen ? "" : "-translate-x-full"
 	}`

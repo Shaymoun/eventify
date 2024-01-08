@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom"
 import SearchBar from "./SearchBar"
 
-const DesktopNavigation = ({ mobileMenuOpen, toggleSearchBar }) => {
+const DesktopNavigation = () => {
 	return (
 		<div className='max-[1024px]:hidden lg:block border-b-2 p-2 bg-primary-bg'>
 			<header className='flex justify-around items-center overflow-x-hidden'>
