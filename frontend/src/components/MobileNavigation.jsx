@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom"
 import SearchBar from "./SearchBar"
 import SearchButton from "../ui/SearchButton"
 
-const MobileNavigation = ({ toggleSearchBar }) => {
+const MobileNavigation = () => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 	const [searchBarOpen, setSearchBarOpen] = useState(false)
 
