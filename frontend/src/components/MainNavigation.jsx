@@ -8,21 +8,10 @@ import DesktopNavigation from "./DesktopNavigation"
 import MobileNavigation from "./MobileNavigation"
 
 const MainNavigation = () => {
-	const { darkMode, mobileMenuOpen, toggleMenu, toggleSearchBar } =
-		useContext(EventifyContext)
-
 	return (
 		<>
-			<MobileNavigation
-				mobileMenuOpen={mobileMenuOpen}
-				toggleMenu={toggleMenu}
-				toggleSearchBar={toggleSearchBar}
-			/>
-			<DesktopNavigation
-				mobileMenuOpen={mobileMenuOpen}
-				toggleMenu={toggleMenu}
-				toggleSearchBar={toggleSearchBar}
-			/>
+			<MobileNavigation />
+			<DesktopNavigation />
 		</>
 	)
 }

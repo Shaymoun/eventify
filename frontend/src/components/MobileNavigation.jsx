@@ -1,12 +1,15 @@
-import { useState } from "react"
-import NavigationButton from "../ui/NavigationButton"
+import { useContext, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
+import { EventifyContext } from "../store/eventify-context"
 import SearchBar from "./SearchBar"
+import NavigationButton from "../ui/NavigationButton"
 import SearchButton from "../ui/SearchButton"
+import Button from "../ui/Button"
 
 const MobileNavigation = () => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 	const [searchBarOpen, setSearchBarOpen] = useState(false)
+	const { isLoggedIn } = useContext(EventifyContext)
 
 	const toggleMenu = () => {
 		setMobileMenuOpen(menuState => !menuState)
@@ -42,19 +45,26 @@ const MobileNavigation = () => {
 				<SearchBar />
 			</div>
 			<div className={`${navBarClasses} transition-transform ease-in-out `}>
-				<nav className='h-1/2 '>
-					<ul className='flex flex-col justify-around items-center h-full w-full border-b-2 *:text-gray-500 text-lg font-semibold '>
-						<NavLink to='/add-event' onClick={toggleMenu}>
-							Add Event
-						</NavLink>
-						<NavLink to='/my-events' onClick={toggleMenu}>
-							My Events
-						</NavLink>
-						<NavLink to='/profile' onClick={toggleMenu}>
-							Profile
-						</NavLink>
-					</ul>
-				</nav>
+				{isLoggedIn && (
+					<nav className='h-1/2 '>
+						<ul className='flex flex-col justify-around items-center h-full w-full border-b-2 *:text-gray-500 text-lg font-semibold '>
+							<NavLink to='/add-event' onClick={toggleMenu}>
+								Add Event
+							</NavLink>
+							<NavLink to='/my-events' onClick={toggleMenu}>
+								My Events
+							</NavLink>
+							<NavLink to='/profile' onClick={toggleMenu}>
+								Profile
+							</NavLink>
+						</ul>
+					</nav>
+				)}
+				{!isLoggedIn && (
+					<div className='flex w-full h-full justify-center items-center'>
+						<Button >{isLoggedIn ? "Logout" : "Login"}</Button>
+					</div>
+				)}
 			</div>
 		</>
 	)
