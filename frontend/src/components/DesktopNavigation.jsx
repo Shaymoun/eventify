@@ -17,29 +17,30 @@ const DesktopNavigation = () => {
 				</div>
 				<nav className='w-1/2'>
 					{isLoggedIn && (
-						<ul className='flex flex-row justify-between items-center px-8 *:text-gray-500 text-md font-semibold lg:w-96 lg:ml-auto'>
-							<NavLink
-								to='/add-event'
-								className='hover:text-primary-color transition-colors duration-300 xl:text-xl'>
-								Add Event
-							</NavLink>
-							<NavLink
-								to='/my-events'
-								className='hover:text-primary-color transition-colors duration-300 xl:text-xl'>
-								My Events
-							</NavLink>
-							<NavLink
-								to='/profile'
-								className='hover:text-primary-color transition-colors duration-300 xl:text-xl'>
-								Profile
-							</NavLink>
-						</ul>
+						<div className='flex'>
+							<ul className='flex flex-row justify-between items-center px-8 *:text-gray-500 text-md font-semibold lg:w-96 lg:ml-auto'>
+								<NavLink
+									to='/add-event'
+									className='hover:text-primary-color transition-colors duration-300 xl:text-xl'>
+									Add Event
+								</NavLink>
+								<NavLink
+									to='/my-events'
+									className='hover:text-primary-color transition-colors duration-300 xl:text-xl'>
+									My Events
+								</NavLink>
+								<NavLink
+									to='/profile'
+									className='hover:text-primary-color transition-colors duration-300 xl:text-xl'>
+									Profile
+								</NavLink>
+							</ul>
+							<Button className='ml-auto mr-8'>Logout</Button>
+						</div>
 					)}
 					{!isLoggedIn && (
-						<div className="flex">
-							<Button className='ml-auto mr-8'>
-								{isLoggedIn ? "Logout" : "Login"}
-							</Button>
+						<div className='flex'>
+							<Button className='ml-auto mr-8'>Login</Button>
 						</div>
 					)}
 				</nav>

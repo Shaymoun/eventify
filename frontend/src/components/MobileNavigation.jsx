@@ -42,7 +42,7 @@ const MobileNavigation = () => {
 						buttonClasses='px-3 py-1.5'
 					/>
 				</header>
-				<SearchBar />
+				{searchBarOpen && <SearchBar />}
 			</div>
 			<div className={`${navBarClasses} transition-transform ease-in-out `}>
 				{isLoggedIn && (
@@ -58,11 +58,14 @@ const MobileNavigation = () => {
 								Profile
 							</NavLink>
 						</ul>
+						<div className='flex w-full h-full justify-center items-start my-8'>
+							<Button>Logout</Button>
+						</div>
 					</nav>
 				)}
 				{!isLoggedIn && (
 					<div className='flex w-full h-full justify-center items-center'>
-						<Button >{isLoggedIn ? "Logout" : "Login"}</Button>
+						<Button>Login</Button>
 					</div>
 				)}
 			</div>

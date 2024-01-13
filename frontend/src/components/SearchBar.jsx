@@ -3,13 +3,8 @@ import SearchButton from "../ui/SearchButton"
 import { EventifyContext } from "../store/eventify-context"
 
 const SearchBar = () => {
-	const { searchBarOpen } = useContext(EventifyContext)
-
 	return (
-		<search
-			className={`flex justify-center items-center  bg-primary-bg px-2   ${
-				searchBarOpen ? "block h-16" : "hidden h-0"
-			} lg:w-full lg:flex h-16`}>
+		<search className='flex justify-center items-center bg-primary-bg px-2 h-16 lg:w-full lg:flex'>
 			<form className='relative md:w-full xl:w-3/4'>
 				<input
 					type='text'
