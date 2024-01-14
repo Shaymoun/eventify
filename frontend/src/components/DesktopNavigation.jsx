@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { EventifyContext } from "../store/eventify-context"
 import SearchBar from "./SearchBar"
@@ -6,8 +6,13 @@ import LogInForm from "./LogInForm"
 import Button from "../ui/Button"
 import Modal from "../ui/Modal"
 
-const DesktopNavigation = () => {
-	const { isLoggedIn } = useContext(EventifyContext)
+const DesktopNavigation = ({
+	isLogInFormVisible,
+	openLogInModal,
+	closeLogInModal,
+}) => {
+	const { isLoggedIn, logOut } = useContext(EventifyContext)
+
 	return (
 		<div className='max-[1024px]:hidden lg:block border-b-2 p-2 bg-primary-bg'>
 			<header className='flex justify-around items-center overflow-x-hidden'>
@@ -37,16 +42,20 @@ const DesktopNavigation = () => {
 									Profile
 								</NavLink>
 							</ul>
-							<Button className='ml-auto mr-8'>Logout</Button>
+							<Button className='ml-auto mr-8' onClick={logOut}>
+								Logout
+							</Button>
 						</div>
 					)}
 					{!isLoggedIn && (
 						<div className='flex'>
-							<Button className='ml-auto mr-8'>Login</Button>
+							<Button className='ml-auto mr-8' onClick={openLogInModal}>
+								Login
+							</Button>
 						</div>
 					)}
-					<Modal>
-						<LogInForm />
+					<Modal open={isLogInFormVisible}>
+						<LogInForm onClose={closeLogInModal} />
 					</Modal>
 				</nav>
 			</header>

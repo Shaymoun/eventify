@@ -1,15 +1,21 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { EventifyContext } from "../store/eventify-context"
 import SearchBar from "./SearchBar"
 import NavigationButton from "../ui/NavigationButton"
 import SearchButton from "../ui/SearchButton"
 import Button from "../ui/Button"
+import Modal from "../ui/Modal"
+import LogInForm from "./LogInForm"
 
-const MobileNavigation = () => {
+const MobileNavigation = ({
+	isLogInFormVisible,
+	openLogInModal,
+	closeLogInModal,
+}) => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 	const [searchBarOpen, setSearchBarOpen] = useState(false)
-	const { isLoggedIn } = useContext(EventifyContext)
+	const { isLoggedIn, logOut } = useContext(EventifyContext)
 
 	const toggleMenu = () => {
 		setMobileMenuOpen(menuState => !menuState)
@@ -59,15 +65,30 @@ const MobileNavigation = () => {
 							</NavLink>
 						</ul>
 						<div className='flex w-full h-full justify-center items-start my-8'>
-							<Button>Logout</Button>
+							<Button
+								onClick={() => {
+									logOut()
+									toggleMenu()
+								}}>
+								Logout
+							</Button>
 						</div>
 					</nav>
 				)}
 				{!isLoggedIn && (
 					<div className='flex w-full h-full justify-center items-center'>
-						<Button>Login</Button>
+						<Button
+							onClick={() => {
+								openLogInModal()
+								toggleMenu()
+							}}>
+							Login
+						</Button>
 					</div>
 				)}
+				<Modal open={isLogInFormVisible}>
+					<LogInForm onClose={closeLogInModal} />
+				</Modal>
 			</div>
 		</>
 	)

@@ -16,16 +16,16 @@ function App() {
 			children: [
 				{ index: true, element: <HomePage /> },
 				{ path: "profile", element: <ProfilePage /> },
-
 				{
 					path: "my-events",
 					children: [
 						{ index: true, element: <MyEventsPage /> },
-						{ path: "add-event", element: <AddEventPage /> },
+
 						{ path: ":eventId", element: <EventDetailPage /> },
 						{ path: ":eventId/edit", element: <EditEventPage /> },
 					],
 				},
+				{ path: "add-event", element: <AddEventPage /> },
 			],
 		},
 	])

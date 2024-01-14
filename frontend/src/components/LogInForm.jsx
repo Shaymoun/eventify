@@ -1,11 +1,15 @@
+import { useContext } from "react"
 import Button from "../ui/Button"
 import { XMarkIcon } from "@heroicons/react/24/outline"
+import { EventifyContext } from "../store/eventify-context"
 
-const LogInForm = () => {
+const LogInForm = ({ onClose }) => {
+	const { logIn } = useContext(EventifyContext)
+
 	return (
 		<>
 			<div className='flex justify-end'>
-				<button className="p-1">
+				<button className='p-1' onClick={onClose}>
 					<XMarkIcon className='block h-6 w-6' />
 				</button>
 			</div>
@@ -13,7 +17,7 @@ const LogInForm = () => {
 				Login
 			</h2>
 			<div className='flex justify-center w-full p-4 mx-auto md:p-8 lg:items-center'>
-				<form action='' className='flex flex-col justify-around w-full'>
+				<form className='flex flex-col justify-around w-full' onSubmit={logIn}>
 					<div>
 						<label htmlFor='email' className='block py-2 text-xl font-semibold'>
 							E-mail

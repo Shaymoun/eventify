@@ -13,9 +13,11 @@ const EventifyContextProvider = ({ children }) => {
 
 	const logIn = () => {
 		setIsLoggedIn(true)
+		localStorage.setItem("isLoggedIn","1")
 	}
 	const logOut = () => {
 		setIsLoggedIn(false)
+		localStorage.setItem("isLoggedIn","0")
 	}
 
 	const ctxValue = {
