@@ -2,7 +2,9 @@ import { useContext } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { EventifyContext } from "../store/eventify-context"
 import SearchBar from "./SearchBar"
+import LogInForm from "./LogInForm"
 import Button from "../ui/Button"
+import Modal from "../ui/Modal"
 
 const DesktopNavigation = () => {
 	const { isLoggedIn } = useContext(EventifyContext)
@@ -43,6 +45,9 @@ const DesktopNavigation = () => {
 							<Button className='ml-auto mr-8'>Login</Button>
 						</div>
 					)}
+					<Modal>
+						<LogInForm />
+					</Modal>
 				</nav>
 			</header>
 		</div>
