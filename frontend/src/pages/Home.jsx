@@ -1,26 +1,43 @@
+import { useLoaderData } from "react-router-dom"
 import EventsList from "../components/EventsList"
 import Button from "../ui/Button"
+import HomeHeader from "../components/HomeHeader"
 
 const HomePage = () => {
+	const data = useLoaderData()
+
+	if (data.isError) {
+		return (
+			<HomeHeader>
+				<section>
+					<h3 className='text-2xl font-semibold mt-6 px-4'>Upcoming events:</h3>
+					<p className="text-xl text-center pt-8">{data.message}</p>
+				</section>
+			</HomeHeader>
+		)
+	}
+
+	const events = data.events
+	
 	return (
-		<div className='py-8 lg:w-[1000px] lg:mx-auto'>
-			<section className="px-4">
-				<h2 className='text-3xl font-bold leading-tight '>
-					The people platform—Where interests become friendships
-				</h2>
-				<p className='text-md py-4 leading-relaxed'>
-					Whatever your interest, from hiking and reading to networking and
-					skill sharing, there are thousands of people who share it on Eventify.
-					Events are happening every day—sign up to join the fun.
-				</p>
-				<Button className='my-2'>Join now</Button>
-			</section>
-			<section>
-				<h3 className='text-2xl font-semibold mt-6 px-4'>Upcoming events:</h3>
-				<EventsList />
-			</section>
-		</div>
+		<>
+			<HomeHeader>
+				<section>
+					<h3 className='text-2xl font-semibold mt-6 px-4'>Upcoming events:</h3>
+					<EventsList events={events} />
+				</section>
+			</HomeHeader>
+		</>
 	)
 }
 
 export default HomePage
+
+export const loader = async () => {
+	const response = await fetch("http://localhost:8080/events")
+	if (!response.ok) {
+		return { isError: true, message: "Could not fetch events." }
+	} else {
+		return response
+	}
+}

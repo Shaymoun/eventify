@@ -1,6 +1,6 @@
 import "./index.css"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import HomePage from "./pages/Home"
+import HomePage, { loader as HomeEventsLoader } from "./pages/Home"
 import RootLayout from "./pages/Root"
 import ProfilePage from "./pages/Profile"
 import AddEventPage from "./pages/AddEvent"
@@ -14,13 +14,16 @@ function App() {
 			path: "/",
 			element: <RootLayout />,
 			children: [
-				{ index: true, element: <HomePage /> },
+				{
+					index: true,
+					element: <HomePage />,
+					loader: HomeEventsLoader,
+				},
 				{ path: "profile", element: <ProfilePage /> },
 				{
 					path: "my-events",
 					children: [
 						{ index: true, element: <MyEventsPage /> },
-
 						{ path: ":eventId", element: <EventDetailPage /> },
 						{ path: ":eventId/edit", element: <EditEventPage /> },
 					],
