@@ -7,12 +7,14 @@ import AddEventPage from "./pages/AddEvent"
 import MyEventsPage from "./pages/MyEvents"
 import EventDetailPage from "./pages/EventDetail"
 import EditEventPage from "./pages/EditEvent"
+import ErrorPage from "./pages/Error"
 
 function App() {
 	const router = createBrowserRouter([
 		{
 			path: "/",
 			element: <RootLayout />,
+			errorElement: <ErrorPage />,
 			children: [
 				{
 					index: true,
