@@ -25,7 +25,7 @@ function App() {
 				{
 					path: "my-events",
 					children: [
-						{ index: true, element: <MyEventsPage /> },
+						{ index: true, element: <MyEventsPage />, loader:HomeEventsLoader},
 						{ path: ":eventId", element: <EventDetailPage /> },
 						{ path: ":eventId/edit", element: <EditEventPage /> },
 					],

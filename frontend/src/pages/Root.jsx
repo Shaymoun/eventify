@@ -6,7 +6,7 @@ const RootLayout = () => {
 	return (
 		<div>
 			<MainNavigation />
-			<main className='bg-primary-bg h-full'>
+			<main className='bg-primary-bg'>
 				<Outlet />
 			</main>
 			<Footer />
