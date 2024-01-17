@@ -6,6 +6,7 @@ const EventsList = ({ events }) => {
 			{events.map(event => (
 				<Event
 					key={event.title}
+					id={event.id}
 					title={event.title}
 					poster={event.poster}
 					date={event.date}

@@ -5,7 +5,9 @@ import RootLayout from "./pages/Root"
 import ProfilePage from "./pages/Profile"
 import AddEventPage from "./pages/AddEvent"
 import MyEventsPage from "./pages/MyEvents"
-import EventDetailPage from "./pages/EventDetail"
+import EventDetailPage, {
+	loader as EventDetailLoader,
+} from "./pages/EventDetail"
 import EditEventPage from "./pages/EditEvent"
 import ErrorPage from "./pages/Error"
 
@@ -25,12 +27,20 @@ function App() {
 				{
 					path: "my-events",
 					children: [
-						{ index: true, element: <MyEventsPage />, loader:HomeEventsLoader},
-						{ path: ":eventId", element: <EventDetailPage /> },
+						{
+							index: true,
+							element: <MyEventsPage />,
+							loader: HomeEventsLoader,
+						},
+						{
+							path: ":eventId",
+							element: <EventDetailPage />,
+							loader: EventDetailLoader,
+						},
 						{ path: ":eventId/edit", element: <EditEventPage /> },
 					],
 				},
-				{ path: "add-event", element: <AddEventPage /> },
+				{ path: "add-event", element: <AddEventPage />, action: () => {} },
 			],
 		},
 	])
