@@ -1,12 +1,14 @@
-import { useLoaderData, useParams } from "react-router-dom"
+import { Link, useLoaderData, useParams } from "react-router-dom"
+import Button from "../ui/Button"
 
 const EventDetailPage = () => {
 	const data = useLoaderData()
-	const { poster, title, date, host, ongoingPeoples, price } = data.event
+	const { id, poster, title, date, host, ongoingPeoples, price, description } =
+		data.event
 	return (
 		<>
 			<div className='min-h-dvh py-10 rounded-md'>
-				<div className='flex flex-col justify-center items-center py-4 px-2 mx-auto bg-white rounded-2xl md:w-4/5 lg:w-96'>
+				<div className='flex flex-col justify-center items-center py-4 px-2 mx-auto bg-white rounded-2xl md:w-3/5 md:p-8'>
 					<div className='p-6'>
 						<img
 							src={poster}
@@ -14,12 +16,22 @@ const EventDetailPage = () => {
 							className='rounded-md h-full'
 						/>
 					</div>
-					<div className='my-8 *:py-2 text-xl text-center'>
+					<div className='my-8 *:p-2 text-2xl '>
 						<h2>{title}</h2>
 						<p>{date}</p>
 						<p>Hosted by: {host}</p>
 						<p>On going: {ongoingPeoples}</p>
 						<p>Price: {price ? price : "Free"}</p>
+
+						<p className='text-xl'>{description}</p>
+					</div>
+					<div className='flex gap-2'>
+						<Button>
+							<Link to='edit'>Edit</Link>
+						</Button>
+						<Button>
+							<Link>Delete</Link>
+						</Button>
 					</div>
 				</div>
 			</div>

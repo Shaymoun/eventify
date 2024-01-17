@@ -32,10 +32,10 @@ const Event = ({ id, title, poster, date, host, ongoingPeoples, price }) => {
 						</div>
 					</div>
 
-					<div className='hidden sm:flex items-center'>
+					<div className='hidden sm:flex items-center w-48 h-48'>
 						<img
 							src={poster}
-							className='w-full h-20 rounded-md sm:h-36 lg:h-40'
+							className='bg-center bg-no-repeat rounded-md w-full'
 						/>
 					</div>
 				</div>
