@@ -1,10 +1,10 @@
 import { useState } from "react"
 import Button from "../ui/Button"
 
-const EventForm = () => {
-	const [isEventFree, setIsEventFree] = useState(true)
+const EventForm = ({ event, type }) => {
+	const [isEventFree, setIsEventFree] = useState(event ? event.price > 0 : false)
 	return (
-		<div className='flex justify-center py-4 sm:w-4/5 sm:mx-auto lg:w-[800px] lg:items-center lg:py-8'>
+		<div className='flex justify-center pt-2 pb-6 sm:w-4/5 sm:mx-auto lg:w-[800px] lg:items-center lg:py-8'>
 			<form
 				action=''
 				className='flex flex-col justify-around h-4/5 w-full px-4'>
@@ -18,6 +18,7 @@ const EventForm = () => {
 						id='name'
 						className='w-full rounded border-2 text-lg px-2 py-1 lg:px-8 lg:py-4'
 						required
+						defaultValue={event ? event.title : ""}
 					/>
 				</div>
 
@@ -31,6 +32,7 @@ const EventForm = () => {
 						id='image'
 						className='w-full rounded border-2 text-lg px-2 py-1 lg:px-8 lg:py-4'
 						required
+						defaultValue={event ? event.poster : ""}
 					/>
 				</div>
 				<div>
@@ -43,6 +45,7 @@ const EventForm = () => {
 						id='host'
 						className='w-full rounded border-2 text-lg px-2 py-1 lg:px-8 lg:py-4'
 						required
+						defaultValue={event ? event.host : ""}
 					/>
 				</div>
 				<div>
@@ -58,6 +61,7 @@ const EventForm = () => {
 						min='1'
 						className='w-full rounded border-2 text-lg px-2 py-1 lg:px-8 lg:py-4'
 						required
+						defaultValue={event ? event.ongoingPeoples : ""}
 					/>
 				</div>
 				<div>
@@ -68,7 +72,7 @@ const EventForm = () => {
 								type='radio'
 								id='free'
 								name=''
-								checked={isEventFree}
+								checked={!isEventFree}
 								onChange={() => {
 									setIsEventFree(state => !state)
 								}}
@@ -82,7 +86,7 @@ const EventForm = () => {
 								type='radio'
 								id='paid'
 								name=''
-								checked={!isEventFree}
+								checked={isEventFree}
 								onChange={() => {
 									setIsEventFree(state => !state)
 								}}
@@ -97,11 +101,11 @@ const EventForm = () => {
 							name='price'
 							id='price'
 							min='0'
-							defaultValue='0'
 							className={`${
-								isEventFree ? "hidden" : "block"
+								!isEventFree ? "hidden" : "block"
 							} w-full rounded border-2  px-2 py-1 lg:px-8 lg:py-4 text-lg`}
 							required
+							defaultValue={event ? event.price : ""}
 						/>
 					</div>
 				</div>
@@ -115,6 +119,7 @@ const EventForm = () => {
 						id='date'
 						className='w-full rounded border-2 px-2 py-1 lg:px-8 lg:py-4'
 						required
+						defaultValue={event ? event.date : ""}
 					/>
 				</div>
 				<div>
@@ -129,12 +134,17 @@ const EventForm = () => {
 						id='description'
 						className='resize-y w-full rounded border-2 px-2 py-1 min-h-36 lg:px-8 lg:py-4'
 						required
+						defaultValue={event ? event.description : ""}
 					/>
 				</div>
-
-				<Button className='mt-4 lg:w-96 lg:mx-auto lg:text-xl'>
-					Add event
-				</Button>
+				<div className='flex gap-3 ml-auto'>
+					<button className='mt-4 px-4 py-3 bg-gray-500 font-semibold text-white rounded-md lg:mx-auto lg:text-xl'>
+						Cancel
+					</button>
+					<Button className='mt-4  lg:mx-auto lg:text-xl'>
+						{type === "edit" ? "Save" : "Add event"}
+					</Button>
+				</div>
 			</form>
 		</div>
 	)

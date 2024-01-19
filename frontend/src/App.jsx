@@ -34,10 +34,20 @@ function App() {
 						},
 						{
 							path: ":eventId",
-							element: <EventDetailPage />,
-							loader: EventDetailLoader,
+
+							children: [
+								{
+									index: true,
+									element: <EventDetailPage />,
+									loader: EventDetailLoader,
+								},
+								{
+									path: "edit",
+									element: <EditEventPage />,
+									loader: EventDetailLoader,
+								},
+							],
 						},
-						{ path: ":eventId/edit", element: <EditEventPage /> },
 					],
 				},
 				{ path: "add-event", element: <AddEventPage />, action: () => {} },
