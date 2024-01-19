@@ -2,7 +2,7 @@ import { useState } from "react"
 import Button from "../ui/Button"
 
 const EventForm = ({ event, type }) => {
-	const [isEventFree, setIsEventFree] = useState(event ? event.price > 0 : false)
+	const [isEventPaid, setIsEventPaid] = useState(event ? event.price > 0 : false)
 	return (
 		<div className='flex justify-center pt-2 pb-6 sm:w-4/5 sm:mx-auto lg:w-[800px] lg:items-center lg:py-8'>
 			<form
@@ -72,9 +72,9 @@ const EventForm = ({ event, type }) => {
 								type='radio'
 								id='free'
 								name=''
-								checked={!isEventFree}
+								checked={!isEventPaid}
 								onChange={() => {
-									setIsEventFree(state => !state)
+									setIsEventPaid(isPaid => !isPaid)
 								}}
 							/>
 							<label htmlFor='free' className='block text-lg py-1'>
@@ -86,9 +86,9 @@ const EventForm = ({ event, type }) => {
 								type='radio'
 								id='paid'
 								name=''
-								checked={isEventFree}
+								checked={isEventPaid}
 								onChange={() => {
-									setIsEventFree(state => !state)
+									setIsEventPaid(isPaid => !isPaid)
 								}}
 							/>
 							<label htmlFor='paid' className='block text-lg '>
@@ -102,7 +102,7 @@ const EventForm = ({ event, type }) => {
 							id='price'
 							min='0'
 							className={`${
-								!isEventFree ? "hidden" : "block"
+								!isEventPaid ? "hidden" : "block"
 							} w-full rounded border-2  px-2 py-1 lg:px-8 lg:py-4 text-lg`}
 							required
 							defaultValue={event ? event.price : ""}

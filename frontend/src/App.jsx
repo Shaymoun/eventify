@@ -34,17 +34,16 @@ function App() {
 						},
 						{
 							path: ":eventId",
-
+							id: "event-detail",
+							loader: EventDetailLoader,
 							children: [
 								{
 									index: true,
 									element: <EventDetailPage />,
-									loader: EventDetailLoader,
 								},
 								{
 									path: "edit",
 									element: <EditEventPage />,
-									loader: EventDetailLoader,
 								},
 							],
 						},

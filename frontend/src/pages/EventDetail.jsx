@@ -1,8 +1,8 @@
-import { Link, useLoaderData, useParams } from "react-router-dom"
+import { Link, useParams, useRouteLoaderData } from "react-router-dom"
 import Button from "../ui/Button"
 
 const EventDetailPage = () => {
-	const data = useLoaderData()
+	const data = useRouteLoaderData("event-detail")
 	const { id, poster, title, date, host, ongoingPeoples, price, description } =
 		data.event
 	return (
