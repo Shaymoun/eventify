@@ -32,21 +32,19 @@ router.post('/', async (req, res, next) => {
 
   let errors = {};
 
-  // if (!isValidText(data.title)) {
-  //   errors.title = 'Invalid title.';
-  // }
+  if (!isValidText(data.title)) {
+    errors.title = 'Invalid title.';
+  }
 
-  // if (!isValidText(data.description)) {
-  //   errors.description = 'Invalid description.';
-  // }
+  if (!isValidText(data.description)) {
+    errors.description = 'Invalid description.';
+  }
 
-  // if (!isValidDate(data.date)) {
-  //   errors.date = 'Invalid date.';
-  // }
+  if (!isValidDate(data.date)) {
+    errors.date = 'Invalid date.';
+  }
 
-  // if (!isValidImageUrl(data.poster)) {
-  //   errors.poster = 'Invalid image.';
-  // }
+
   
   if (Object.keys(errors).length > 0) {
     return res.status(422).json({
@@ -80,9 +78,6 @@ router.patch('/:id', async (req, res, next) => {
     errors.date = 'Invalid date.';
   }
 
-  if (!isValidImageUrl(data.poster)) {
-    errors.poster = 'Invalid image.';
-  }
 
   if (Object.keys(errors).length > 0) {
     return res.status(422).json({
