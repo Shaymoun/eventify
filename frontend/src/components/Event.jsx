@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import Button from "../ui/Button"
 import {
 	CheckCircleIcon,
@@ -7,9 +7,13 @@ import {
 } from "@heroicons/react/24/outline"
 
 const Event = ({ id, title, poster, date, host, ongoingPeoples, price }) => {
+	const location = useLocation()
+	const path =
+		location.pathname.split("/")[1] === "my-events" ? id : "/my-events/" + id
+	console.log()
 	return (
 		<li>
-			<Link to={`my-events/${id}`}>
+			<Link to={path}>
 				<div className='flex w-full justify-between bg-white my-4 p-4 lg:flex-row-reverse lg:justify-around'>
 					<div className='flex flex-col w-full sm:w-3/4'>
 						<h2 className='text-xl pb-2 font-semibold'>{title}</h2>

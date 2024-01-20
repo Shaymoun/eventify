@@ -6,7 +6,7 @@ const ProfilePage = () => {
 			<div className='flex flex-col justify-center items-center py-4 px-2 mx-auto bg-white rounded-2xl md:w-4/5 lg:w-96'>
 				<div className='p-6'>
 					<img
-						src='https://source.unsplash.com/random/300x300'
+						src='https://i.pinimg.com/280x280_RS/75/3b/cf/753bcfb53ae87ed8f793535b41d96433.jpg'
 						alt='Profile picture'
 						className='rounded-full h-40'
 					/>

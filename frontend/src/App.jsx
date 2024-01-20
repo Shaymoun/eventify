@@ -7,8 +7,10 @@ import AddEventPage from "./pages/AddEvent"
 import MyEventsPage from "./pages/MyEvents"
 import EventDetailPage, {
 	loader as EventDetailLoader,
+	action as deleteEventAction,
 } from "./pages/EventDetail"
-import EditEventPage from "./pages/EditEvent"
+import { action as changeEventAction } from "./components/EventForm"
+import EditEventPage, { action as updateEventAction } from "./pages/EditEvent"
 import ErrorPage from "./pages/Error"
 
 function App() {
@@ -40,16 +42,22 @@ function App() {
 								{
 									index: true,
 									element: <EventDetailPage />,
+									action: deleteEventAction,
 								},
 								{
 									path: "edit",
 									element: <EditEventPage />,
+									action: updateEventAction,
 								},
 							],
 						},
 					],
 				},
-				{ path: "add-event", element: <AddEventPage />, action: () => {} },
+				{
+					path: "add-event",
+					element: <AddEventPage />,
+					action: changeEventAction,
+				},
 			],
 		},
 	])

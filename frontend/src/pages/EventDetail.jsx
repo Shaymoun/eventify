@@ -1,10 +1,21 @@
-import { Link, useParams, useRouteLoaderData } from "react-router-dom"
+import {
+	Link,
+	json,
+	redirect,
+	useParams,
+	useRouteLoaderData,
+	useSubmit,
+} from "react-router-dom"
 import Button from "../ui/Button"
 
 const EventDetailPage = () => {
 	const data = useRouteLoaderData("event-detail")
 	const { id, poster, title, date, host, ongoingPeoples, price, description } =
 		data.event
+	const submit = useSubmit()
+	const startDeleteHandler = () => {
+		submit(null, { method: "DELETE" })
+	}
 	return (
 		<>
 			<div className='min-h-dvh py-10 rounded-md'>
@@ -29,9 +40,11 @@ const EventDetailPage = () => {
 						<Button>
 							<Link to='edit'>Edit</Link>
 						</Button>
-						<Button>
-							<Link>Delete</Link>
-						</Button>
+						<button
+							onClick={startDeleteHandler}
+							className='py-2 px-4 bg-red-400 rounded-md font-semibold text-white'>
+							Delete
+						</button>
 					</div>
 				</div>
 			</div>
@@ -53,4 +66,17 @@ export const loader = async ({ request, params }) => {
 	} else {
 		return response
 	}
+}
+
+export const action = async ({ request, params }) => {
+	const id = params.eventId
+	const response = await fetch("http://localhost:8080/events/" + id, {
+		method: "DELETE",
+	})
+
+	if (!response.ok) {
+		throw json({ message: "Could not delete event." }, { status: 500 })
+	}
+
+	return redirect("/")
 }
