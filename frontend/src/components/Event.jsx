@@ -6,11 +6,21 @@ import {
 	CalendarDaysIcon,
 } from "@heroicons/react/24/outline"
 
-const Event = ({ id, title, poster, date, host, ongoingPeoples, price }) => {
+const Event = ({
+	id,
+	title,
+	poster,
+	date,
+	host,
+	ongoingPeoples,
+	maxPeoples,
+	price,
+}) => {
 	const location = useLocation()
 	const path =
 		location.pathname.split("/")[1] === "my-events" ? id : "/my-events/" + id
-	console.log()
+	
+	const maxNumberOfPeoples = maxPeoples === 0 ? '' : `/${maxPeoples}`
 	return (
 		<li>
 			<Link to={path}>
@@ -26,11 +36,11 @@ const Event = ({ id, title, poster, date, host, ongoingPeoples, price }) => {
 							<div className='flex'>
 								<div className='flex items-center'>
 									<CheckCircleIcon className='inline-block w-6 h-6 mr-1' />
-									<span>{ongoingPeoples} going </span>
+									<span>{ongoingPeoples}{maxNumberOfPeoples} going </span>
 								</div>
 								<div className='flex items-center ml-2'>
 									<TicketIcon className='inline-block w-6 h-6 mr-1' />
-									<span>{price > 0 ? price : "Free"}</span>
+									<span>{price > 0 ? `${price}$` : "Free"}</span>
 								</div>
 							</div>
 						</div>

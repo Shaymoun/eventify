@@ -10,7 +10,7 @@ import EventDetailPage, {
 	action as deleteEventAction,
 } from "./pages/EventDetail"
 import { action as changeEventAction } from "./components/EventForm"
-import EditEventPage, { action as updateEventAction } from "./pages/EditEvent"
+import EditEventPage from "./pages/EditEvent"
 import ErrorPage from "./pages/Error"
 
 function App() {
@@ -47,7 +47,7 @@ function App() {
 								{
 									path: "edit",
 									element: <EditEventPage />,
-									action: updateEventAction,
+									action: changeEventAction,
 								},
 							],
 						},

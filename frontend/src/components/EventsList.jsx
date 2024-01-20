@@ -12,6 +12,7 @@ const EventsList = ({ events }) => {
 					date={event.date}
 					host={event.host}
 					ongoingPeoples={event.ongoingPeoples}
+					maxPeoples={event.maxPeoples}
 					price={event.price}
 				/>
 			))}

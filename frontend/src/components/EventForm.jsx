@@ -6,6 +6,11 @@ const EventForm = ({ method, event }) => {
 	const [isEventPaid, setIsEventPaid] = useState(
 		event ? event.price > 0 : false
 	)
+	const [maxNumOfPeoples, setMaxNumOfPeoples] = useState({
+		isLimit: event ? event.maxPeoples > 0 : false,
+		maxAmount: event ? event.maxPeoples : 0,
+	})
+
 	const navigate = useNavigate()
 
 	const cancelHandler = () => {
@@ -58,20 +63,77 @@ const EventForm = ({ method, event }) => {
 					/>
 				</div>
 				<div>
-					<label
-						htmlFor='maxpeoples'
-						className='block py-2 text-xl font-semibold'>
+					<p className='block py-2 text-xl font-semibold'>
 						Maximum number of participants
-					</label>
-					<input
-						type='number'
-						name='maxpeoples'
-						id='maxpeoples'
-						min='1'
-						className='w-full rounded border-2 text-lg px-2 py-1 lg:px-8 lg:py-4'
-						required
-						defaultValue={event ? event.ongoingPeoples : ""}
-					/>
+					</p>
+					<div className='flex items-center gap-4 my-1'>
+						<div className='flex gap-1'>
+							<input
+								type='radio'
+								id='nolimit'
+								name=''
+								checked={!maxNumOfPeoples.isLimit}
+								onChange={() => {
+									setMaxNumOfPeoples(state => {
+										return { ...state, isLimit: false }
+									})
+								}}
+							/>
+							<label htmlFor='free' className='block text-lg py-1'>
+								No limit
+							</label>
+						</div>
+						<div className='flex gap-1'>
+							<input
+								type='radio'
+								id='limit'
+								name=''
+								checked={maxNumOfPeoples.isLimit}
+								onChange={() => {
+									setMaxNumOfPeoples(state => {
+										return { ...state, isLimit: true }
+									})
+								}}
+							/>
+							<label htmlFor='paid' className='block text-lg '>
+								Limit
+							</label>
+						</div>
+
+						<input
+							type='number'
+							name='maxpeoples'
+							id='maxpeoples'
+							min={event ? event.ongoingPeoples : 0}
+							className={`${
+								!maxNumOfPeoples.isLimit ? "hidden" : "block"
+							} w-20 rounded border-2 px-1 text-lg`}
+							required
+							onChange={e => {
+								setMaxNumOfPeoples(state => {
+									return { ...state, maxAmount: e.target.value }
+								})
+							}}
+							defaultValue={event ? event.maxPeoples : 0}
+						/>
+						<div className='flex text-lg'>
+							<p>
+								{event ? "Users joined: " : ""}
+								{event ? event.ongoingPeoples : ""}
+							</p>
+							<input
+								disabled
+								type='text'
+								name='ongoingPeoples'
+								id='ongoingPeoples'
+								min='0'
+								className={`${
+									!maxNumOfPeoples.isLimit ? "hidden" : "block"
+								} w-20 rounded px-1  bg-primary-bg`}
+								defaultValue={event ? `/ ${event.maxPeoples}` : ""}
+							/>
+						</div>
+					</div>
 				</div>
 				<div>
 					<p className='block py-2 text-xl font-semibold'>Price</p>
@@ -112,10 +174,11 @@ const EventForm = ({ method, event }) => {
 							min='0'
 							className={`${
 								!isEventPaid ? "hidden" : "block"
-							} w-full rounded border-2  px-2 py-1 lg:px-8 lg:py-4 text-lg`}
+							} w-20 rounded border-2 px-1 text-lg`}
 							required
 							defaultValue={event ? event.price : 0}
 						/>
+						
 					</div>
 				</div>
 				<div>
@@ -148,13 +211,12 @@ const EventForm = ({ method, event }) => {
 				</div>
 				<div className='flex gap-3 ml-auto'>
 					<button
+						onClick={cancelHandler}
 						type='button'
 						className='mt-4 px-4 py-3 bg-gray-500 font-semibold text-white rounded-md lg:mx-auto lg:text-xl'>
 						Cancel
 					</button>
-					<Button
-						onClick={cancelHandler}
-						className='mt-4  lg:mx-auto lg:text-xl'>
+					<Button className='mt-4  lg:mx-auto lg:text-xl'>
 						{method === "PATCH" ? "Save" : "Add event"}
 					</Button>
 				</div>
@@ -168,14 +230,16 @@ export default EventForm
 export const action = async ({ request, params }) => {
 	const method = request.method
 	const data = await request.formData()
+	const onGoing = method === "POST" ? 0 : +data.get("ongoingPeoples")
 
 	const eventData = {
 		title: data.get("title"),
 		poster: data.get("poster"),
 		date: data.get("date"),
 		host: data.get("host"),
-		ongoingPeoples: +data.get("maxpeoples"),
+		ongoingPeoples: onGoing,
 		price: +data.get("price"),
+		maxPeoples: +data.get("maxpeoples"),
 		description: data.get("description"),
 	}
 
