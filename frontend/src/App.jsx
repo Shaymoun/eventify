@@ -12,6 +12,7 @@ import EventDetailPage, {
 import { action as changeEventAction } from "./components/EventForm"
 import EditEventPage from "./pages/EditEvent"
 import ErrorPage from "./pages/Error"
+import SearchResults, { loader as searchedEvents } from "./pages/SearchResults"
 
 function App() {
 	const router = createBrowserRouter([
@@ -25,6 +26,7 @@ function App() {
 					element: <HomePage />,
 					loader: HomeEventsLoader,
 				},
+				{ path: "search/:id", element: <SearchResults />, loader: searchedEvents },
 				{ path: "profile", element: <ProfilePage /> },
 				{
 					path: "my-events",

@@ -2,23 +2,28 @@ import { useLoaderData } from "react-router-dom"
 import EventsList from "../components/EventsList"
 import Button from "../ui/Button"
 import HomeHeader from "../components/HomeHeader"
+import { useEffect, useState } from "react"
 
 const HomePage = () => {
 	const data = useLoaderData()
+	const events = data
+	// const [homeEvents, setHomeEvents] = useState([])
+
+	// useEffect(() => {
+	// 	setHomeEvents(events)
+	// },[])
 
 	if (data.isError) {
 		return (
 			<HomeHeader>
 				<section>
 					<h3 className='text-2xl font-semibold mt-6 px-4'>Upcoming events:</h3>
-					<p className="text-xl text-center pt-8">{data.message}</p>
+					<p className='text-xl text-center pt-8'>{data.message}</p>
 				</section>
 			</HomeHeader>
 		)
 	}
 
-	const events = data.events
-	
 	return (
 		<>
 			<HomeHeader>
@@ -38,6 +43,7 @@ export const loader = async () => {
 	if (!response.ok) {
 		return { isError: true, message: "Could not fetch events." }
 	} else {
-		return response
+		const resData = await response.json()
+		return resData.events
 	}
 }

@@ -230,14 +230,15 @@ export default EventForm
 export const action = async ({ request, params }) => {
 	const method = request.method
 	const data = await request.formData()
-	const onGoing = method === "POST" ? 0 : +data.get("ongoingPeoples")
+	// const onGoing = method === "POST" ? 0 : +data.get("ongoingPeoples")
 
 	const eventData = {
 		title: data.get("title"),
 		poster: data.get("poster"),
 		date: data.get("date"),
 		host: data.get("host"),
-		ongoingPeoples: onGoing,
+		// ongoingPeoples: onGoing,
+		ongoingPeoples: +data.get("ongoingPeoples"),
 		price: +data.get("price"),
 		maxPeoples: +data.get("maxpeoples"),
 		description: data.get("description"),
