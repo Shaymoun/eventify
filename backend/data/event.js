@@ -18,6 +18,7 @@ async function getAll() {
 	if (!storedData.events) {
 		throw new NotFoundError("Could not find any events.")
 	}
+
 	return storedData.events
 }
 
@@ -33,6 +34,26 @@ async function get(id) {
 	}
 
 	return event
+}
+
+async function getEventsByNameOrLocation(phrase) {
+	const keywords = phrase
+	// const location = phrase.split("&")[1]
+	const storedData = await readData()
+	const foundEvents = []
+
+	if (!storedData.events || storedData.events.length === 0) {
+		throw new NotFoundError("Could not find any events.")
+	}
+
+	for (const event of storedData.events) {
+		if (
+			event.title.toLowerCase().trim().includes(keywords.toLowerCase().trim())
+		) {
+			foundEvents.push(event)
+		}
+	}
+	return foundEvents
 }
 
 async function add(data) {
@@ -68,3 +89,4 @@ exports.get = get
 exports.add = add
 exports.replace = replace
 exports.remove = remove
+exports.getEventsByNameOrLocation = getEventsByNameOrLocation
