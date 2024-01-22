@@ -2,16 +2,17 @@ import { useLoaderData } from "react-router-dom"
 import EventsList from "../components/EventsList"
 import Button from "../ui/Button"
 import HomeHeader from "../components/HomeHeader"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { EventifyContext } from "../store/eventify-context"
 
 const HomePage = () => {
 	const data = useLoaderData()
-	const events = data
-	// const [homeEvents, setHomeEvents] = useState([])
-
-	// useEffect(() => {
-	// 	setHomeEvents(events)
-	// },[])
+	
+	useEffect(() => {
+		updateEvents(data)
+	}, [data])
+	const { events, updateEvents } = useContext(EventifyContext)
+	
 
 	if (data.isError) {
 		return (

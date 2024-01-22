@@ -24,7 +24,7 @@ const Event = ({
 	return (
 		<li>
 			<Link to={path}>
-				<div className='flex w-full justify-between bg-white my-4 p-4 lg:flex-row-reverse lg:justify-around'>
+				<div className='flex w-full justify-between bg-white my-4 p-4 rounded lg:flex-row-reverse lg:justify-around'>
 					<div className='flex flex-col w-full sm:w-3/4'>
 						<h2 className='text-xl pb-2 font-semibold'>{title}</h2>
 						<p className='text-lg py-1'>Hosted by: {host} </p>

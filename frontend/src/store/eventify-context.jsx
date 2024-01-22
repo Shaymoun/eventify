@@ -1,18 +1,18 @@
 import { createContext, useState } from "react"
 
 export const EventifyContext = createContext({
-	
+	events: [],
 	isLoggedIn: false,
 	darkMode: false,
 	logIn: () => {},
 	logOut: () => {},
-	
+	updateEvents: () => {},
 })
 
 const EventifyContextProvider = ({ children }) => {
 	const [darkMode, setDarkMode] = useState(false)
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
-	
+	const [events, setEvents] = useState([])
 
 	const logIn = () => {
 		setIsLoggedIn(true)
@@ -22,13 +22,17 @@ const EventifyContextProvider = ({ children }) => {
 		setIsLoggedIn(false)
 		localStorage.setItem("isLoggedIn", "0")
 	}
-	
+	const updateEvents = events => {
+		setEvents(events)
+	}
+
 	const ctxValue = {
 		darkMode,
 		isLoggedIn,
 		logIn,
 		logOut,
-		
+		events,
+		updateEvents,
 	}
 
 	return (
