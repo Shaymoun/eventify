@@ -7,7 +7,7 @@ const SearchResults = () => {
 
 	return (
 		<>
-			{events.length === 0 && <p>No events found.</p>}
+			{events.length === 0 && <p className="text-center text-3xl">No events found.</p>}
 			<EventsList events={events} />
 		</>
 	)
