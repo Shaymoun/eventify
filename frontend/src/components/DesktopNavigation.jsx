@@ -1,10 +1,12 @@
 import { useContext, useState } from "react"
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { EventifyContext } from "../store/eventify-context"
 import SearchBar from "./SearchBar"
 import LogInForm from "./LogInForm"
 import Button from "../ui/Button"
 import Modal from "../ui/Modal"
+import SignUpForm from "./SignUpForm"
+import { useAuth } from "../store/auth-context"
 
 const DesktopNavigation = ({
 	isLogInFormVisible,
@@ -12,7 +14,23 @@ const DesktopNavigation = ({
 	closeLogInModal,
 }) => {
 	const { isLoggedIn, logOut } = useContext(EventifyContext)
+	const [authAction, setAuthAction] = useState(true)
+	const { logout, currentUser } = useAuth()
+	const navigate = useNavigate()
 
+	const toggleAuthAction = () => {
+		setAuthAction(action => !action)
+	}
+
+	const setAuthActionCloseModal = () => {
+		closeLogInModal()
+		setAuthAction(true)
+	}
+
+	function handleLogout() {
+		logout()
+		navigate("/")
+	}
 	return (
 		<div className='max-[1024px]:hidden lg:block border-b-2 p-2 bg-primary-bg'>
 			<header className='flex justify-around items-center overflow-x-hidden'>
@@ -23,7 +41,7 @@ const DesktopNavigation = ({
 					<SearchBar />
 				</div>
 				<nav className='w-1/2'>
-					{isLoggedIn && (
+					{currentUser && (
 						<div className='flex'>
 							<ul className='flex flex-row justify-between items-center px-8 *:text-gray-500 text-md font-semibold lg:w-96 lg:ml-auto'>
 								<NavLink
@@ -42,12 +60,12 @@ const DesktopNavigation = ({
 									Profile
 								</NavLink>
 							</ul>
-							<Button className='ml-auto mr-8' onClick={logOut}>
+							<Button className='ml-auto mr-8' onClick={handleLogout}>
 								Logout
 							</Button>
 						</div>
 					)}
-					{!isLoggedIn && (
+					{!currentUser && (
 						<div className='flex'>
 							<Button className='ml-auto mr-8' onClick={openLogInModal}>
 								Login
@@ -55,7 +73,17 @@ const DesktopNavigation = ({
 						</div>
 					)}
 					<Modal open={isLogInFormVisible}>
-						<LogInForm onClose={closeLogInModal} />
+						{authAction ? (
+							<LogInForm
+								onClose={setAuthActionCloseModal}
+								toggleAuthAction={toggleAuthAction}
+							/>
+						) : (
+							<SignUpForm
+								onClose={setAuthActionCloseModal}
+								toggleAuthAction={toggleAuthAction}
+							/>
+						)}
 					</Modal>
 				</nav>
 			</header>

@@ -1,30 +1,32 @@
 import { useContext, useEffect, useState } from "react"
 import Button from "../ui/Button"
 import { XMarkIcon } from "@heroicons/react/24/outline"
-import { EventifyContext } from "../store/eventify-context"
-import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../firebase"
 import { useNavigate } from "react-router-dom"
+import { createUserWithEmailAndPassword } from "firebase/auth"
 import { useAuth } from "../store/auth-context"
 
-const LogInForm = ({ onClose, toggleAuthAction }) => {
-	const { logIn } = useContext(EventifyContext) //logIn było dodane do onSubmit na form ponizej
+const SignUpForm = ({ onClose, toggleAuthAction }) => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
-	const { login } = useAuth()
+	const { signup } = useAuth()
 
 	const navigate = useNavigate()
 
-	async function signIn(e) {
+	async function signUp(e) {
 		e.preventDefault()
+		if (password.trim().length < 6) {
+			setError("Password must have at least 6 characters.")
+			return
+		}
 		try {
 			setError("")
 			setLoading(true)
-			await login(email, password)
+			await signup(email, password)
 		} catch (error) {
-			setError("Failed to sign in. Check your e-mail and password.")
+			setError("Failed to create an account")
 		}
 		setLoading(false)
 		onClose()
@@ -47,22 +49,27 @@ const LogInForm = ({ onClose, toggleAuthAction }) => {
 				</button>
 			</div>
 			<h2 className='text-2xl text-primary-color font-bold text-center px-4 py-2 md:text-4xl'>
-				Login
+				Create your account
 			</h2>
 			<div className='flex justify-center w-full p-4 mx-auto md:p-8 lg:items-center'>
-				<form className='flex flex-col justify-around w-full' onSubmit={signIn}>
+				<form className='flex flex-col justify-around w-full' onSubmit={signUp}>
 					<div>
 						{error && (
-							<p className='text-lg text-red-600 font-semibold text-center'>{error}</p>
+							<p className='text-lg text-red-600 font-semibold text-center'>
+								{error}
+							</p>
 						)}
-						<label htmlFor='email' className='block py-2 text-xl font-semibold'>
+						<label
+							htmlFor='email'
+							className='block py-2 text-xl font-semibold '>
 							E-mail
 						</label>
 						<input
 							type='email'
 							name='email'
-							id='loginemail'
+							id='email'
 							className='w-full rounded border-2 px-2 py-1 lg:px-4 lg:py-2'
+							value={email}
 							required
 							onChange={e => setEmail(e.target.value)}
 						/>
@@ -76,7 +83,8 @@ const LogInForm = ({ onClose, toggleAuthAction }) => {
 						<input
 							type='password'
 							name='password'
-							id='loginpassword'
+							id='password'
+							value={password}
 							className='w-full rounded border-2 px-2 py-1 lg:px-4 lg:py-2'
 							required
 							onChange={e => setPassword(e.target.value)}
@@ -86,14 +94,14 @@ const LogInForm = ({ onClose, toggleAuthAction }) => {
 					<Button
 						disabled={loading}
 						className='mt-4 lg:w-96 lg:mx-auto lg:text-xl'>
-						Login
+						Register
 					</Button>
 					<a
 						className='text-center mt-4 cursor-pointer font-semibold'
 						onClick={() => {
 							toggleAuthAction()
 						}}>
-						Need an account?
+						Already have account?
 					</a>
 				</form>
 			</div>
@@ -101,4 +109,4 @@ const LogInForm = ({ onClose, toggleAuthAction }) => {
 	)
 }
 
-export default LogInForm
+export default SignUpForm

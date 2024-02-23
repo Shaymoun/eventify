@@ -7,9 +7,11 @@ import {
 	useSubmit,
 } from "react-router-dom"
 import Button from "../ui/Button"
+import { useAuth } from "../store/auth-context"
 
 const EventDetailPage = () => {
 	const data = useRouteLoaderData("event-detail")
+	const { currentUser } = useAuth()
 	const { id, poster, title, date, host, ongoingPeoples, price, description } =
 		data.event
 	const submit = useSubmit()
@@ -36,16 +38,18 @@ const EventDetailPage = () => {
 
 						<p className='text-xl'>{description}</p>
 					</div>
-					<div className='flex gap-2'>
-						<Button>
-							<Link to='edit'>Edit</Link>
-						</Button>
-						<button
-							onClick={startDeleteHandler}
-							className='py-2 px-4 bg-red-400 rounded-md font-semibold text-white'>
-							Delete
-						</button>
-					</div>
+					{currentUser && (
+						<div className='flex gap-2'>
+							<Button>
+								<Link to='edit'>Edit</Link>
+							</Button>
+							<button
+								onClick={startDeleteHandler}
+								className='py-2 px-4 bg-red-400 rounded-md font-semibold text-white'>
+								Delete
+							</button>
+						</div>
+					)}
 				</div>
 			</div>
 		</>

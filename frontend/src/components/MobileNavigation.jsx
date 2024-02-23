@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react"
-import { Link, NavLink } from "react-router-dom"
-import { EventifyContext } from "../store/eventify-context"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import SearchBar from "./SearchBar"
 import NavigationButton from "../ui/NavigationButton"
 import SearchButton from "../ui/SearchButton"
 import Button from "../ui/Button"
 import Modal from "../ui/Modal"
 import LogInForm from "./LogInForm"
+import SignUpForm from "./SignUpForm"
+import { useAuth } from "../store/auth-context"
 
 const MobileNavigation = ({
 	isLogInFormVisible,
@@ -15,14 +16,30 @@ const MobileNavigation = ({
 }) => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 	const [searchBarOpen, setSearchBarOpen] = useState(false)
-	const { isLoggedIn, logOut } = useContext(EventifyContext)
+	const [authAction, setAuthAction] = useState(true)
+	const { logout, currentUser } = useAuth()
+	const navigate = useNavigate()
 
 	const toggleMenu = () => {
 		setMobileMenuOpen(menuState => !menuState)
 	}
 
+	const setAuthActionCloseModal = () => {
+		closeLogInModal()
+		setAuthAction(true)
+	}
+
 	const toggleSearchBar = () => {
 		setSearchBarOpen(searchBarState => !searchBarState)
+	}
+
+	const toggleAuthAction = () => {
+		setAuthAction(action => !action)
+	}
+
+	function handleLogout() {
+		logout()
+		navigate("/")
 	}
 
 	const navBarClasses = `z-10 fixed h-dvh w-full bg-primary-bg  ${
@@ -51,7 +68,7 @@ const MobileNavigation = ({
 				{searchBarOpen && <SearchBar />}
 			</div>
 			<div className={`${navBarClasses} transition-transform ease-in-out `}>
-				{isLoggedIn && (
+				{currentUser && (
 					<nav className='h-1/2 '>
 						<ul className='flex flex-col justify-around items-center h-full w-full border-b-2 *:text-gray-500 text-lg font-semibold '>
 							<NavLink to='/add-event' onClick={toggleMenu}>
@@ -67,15 +84,15 @@ const MobileNavigation = ({
 						<div className='flex w-full h-full justify-center items-start my-8'>
 							<Button
 								onClick={() => {
-									logOut()
 									toggleMenu()
+									handleLogout()
 								}}>
 								Logout
 							</Button>
 						</div>
 					</nav>
 				)}
-				{!isLoggedIn && (
+				{!currentUser && (
 					<div className='flex w-full h-full justify-center items-center'>
 						<Button
 							onClick={() => {
@@ -87,7 +104,17 @@ const MobileNavigation = ({
 					</div>
 				)}
 				<Modal open={isLogInFormVisible}>
-					<LogInForm onClose={closeLogInModal} />
+					{authAction ? (
+						<LogInForm
+							onClose={setAuthActionCloseModal}
+							toggleAuthAction={toggleAuthAction}
+						/>
+					) : (
+						<SignUpForm
+							onClose={setAuthActionCloseModal}
+							toggleAuthAction={toggleAuthAction}
+						/>
+					)}
 				</Modal>
 			</div>
 		</>

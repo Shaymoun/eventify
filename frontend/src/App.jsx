@@ -13,6 +13,9 @@ import { action as changeEventAction } from "./components/EventForm"
 import EditEventPage from "./pages/EditEvent"
 import ErrorPage from "./pages/Error"
 import SearchResults, { loader as searchedEvents } from "./pages/SearchResults"
+import PrivateRoute from "./components/PrivateRoute"
+import ForgotPassword from "./pages/ForgotPassword"
+import EditProfilePage from "./pages/EditProfilePage"
 
 function App() {
 	const router = createBrowserRouter([
@@ -26,14 +29,41 @@ function App() {
 					element: <HomePage />,
 					loader: HomeEventsLoader,
 				},
-				{ path: "search/:id", element: <SearchResults />, loader: searchedEvents },
-				{ path: "profile", element: <ProfilePage /> },
+				{
+					path: "search/:id",
+					element: <SearchResults />,
+					loader: searchedEvents,
+				},
+				{
+					path: "profile",
+					element: (
+						<PrivateRoute>
+							<ProfilePage />
+						</PrivateRoute>
+					),
+				},
+				{
+					path: "edit-profile",
+					element: (
+						<PrivateRoute>
+							<EditProfilePage />
+						</PrivateRoute>
+					),
+				},
+				{
+					path: "forgot",
+					element: <ForgotPassword />,
+				},
 				{
 					path: "my-events",
 					children: [
 						{
 							index: true,
-							element: <MyEventsPage />,
+							element: (
+								<PrivateRoute>
+									<MyEventsPage />
+								</PrivateRoute>
+							),
 							loader: HomeEventsLoader,
 						},
 						{
@@ -48,7 +78,11 @@ function App() {
 								},
 								{
 									path: "edit",
-									element: <EditEventPage />,
+									element: (
+										<PrivateRoute>
+											<EditEventPage />
+										</PrivateRoute>
+									),
 									action: changeEventAction,
 								},
 							],
@@ -57,7 +91,11 @@ function App() {
 				},
 				{
 					path: "add-event",
-					element: <AddEventPage />,
+					element: (
+						<PrivateRoute>
+							<AddEventPage />
+						</PrivateRoute>
+					),
 					action: changeEventAction,
 				},
 			],
